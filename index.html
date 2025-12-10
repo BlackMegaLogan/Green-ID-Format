@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +65,64 @@
             border-color: #cc0000;
             color: #cc0000;
         }
+        .confirmation {
+            background-color: #fff8dc;
+            border-color: #daa520;
+            color: #8b4513;
+        }
+        .hidden {
+            display: none;
+        }
+        .confirmation-details {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .confirmation-details h4 {
+            margin: 0 0 10px 0;
+            color: #2d5016;
+        }
+        .confirmation-details p {
+            margin: 5px 0;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .security-note {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            color: #2d5016;
+            cursor: pointer;
+        }
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -73,70 +132,118 @@
     <h2>About GreenID</h2>
     <p>Queen Fendergluid I of Glorbenia (sadly with some help of ChatGPT) developed GreenID to allow Glorbenian citizens to use Glorbenian services that require an ID (Glorbenian National Bank for example). That's about it!</p>
     
-    <h2>Register for GreenID</h2>
-    <form id="registrationForm">
-        <div class="form-group">
-            <label for="nation">Nation of Residence:</label>
-            <select id="nation" name="nation" required>
-                <option value="">Select your nation...</option>
-                <option value="United States">United States</option>
-                <option value="Canada">Canada</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Australia">Australia</option>
-                <option value="Germany">Germany</option>
-                <option value="France">France</option>
-                <option value="Japan">Japan</option>
-                <option value="South Korea">South Korea</option>
-                <option value="Brazil">Brazil</option>
-                <option value="Mexico">Mexico</option>
-                <option value="Italy">Italy</option>
-                <option value="Spain">Spain</option>
-                <option value="Netherlands">Netherlands</option>
-                <option value="Sweden">Sweden</option>
-                <option value="Norway">Norway</option>
-                <option value="Denmark">Denmark</option>
-                <option value="Finland">Finland</option>
-                <option value="Switzerland">Switzerland</option>
-                <option value="Austria">Austria</option>
-                <option value="Belgium">Belgium</option>
-                <option value="New Zealand">New Zealand</option>
-                <option value="Ireland">Ireland</option>
-                <option value="Portugal">Portugal</option>
-                <option value="Greece">Greece</option>
-                <option value="Poland">Poland</option>
-                <option value="Czech Republic">Czech Republic</option>
-                <option value="Hungary">Hungary</option>
-                <option value="Other">Other</option>
-            </select>
+    <div id="registration-section">
+        <h2>Register for GreenID</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="nation">Nation of Residence:</label>
+                <select id="nation" name="nation" required>
+                    <option value="">Select your nation...</option>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Japan">Japan</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Spain">Spain</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Finland">Finland</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Austria">Austria</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="New Zealand">New Zealand</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Greece">Greece</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Czech Republic">Czech Republic</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Chosen Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your chosen name">
+            </div>
+            
+
+            <div class="form-group">
+                <label for="gender">Gender Identity:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select your gender identity...</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Genderqueer">Genderqueer</option>
+                    <option value="Genderfluid">Genderfluid</option>
+                    <option value="Two-spirit">Two-spirit</option>
+                    <option value="Agender">Agender</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 123-4567">
+            </div>
+            
+            <div class="form-group">
+                <label>Confirmation Preferences:</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="email_confirmation" name="email_confirmation" checked>
+                        📧 Send confirmation email with my ID details
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="sms_confirmation" name="sms_confirmation" checked>
+                        📱 Send confirmation SMS with my ID details
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" id="generateBtn">Generate My Glorbenian ID</button>
+        </form>
+    </div>
+    
+    <div id="confirmation-section" class="hidden">
+        <h2>Confirm Your Registration</h2>
+        <div class="confirmation-details">
+            <h4>Your Generated Glorbenian ID:</h4>
+            <p><strong id="confirm-id"></strong></p>
+            
+            <h4>Registration Details:</h4>
+            <p><strong>Name:</strong> <span id="confirm-name"></span></p>
+            <p><strong>Nation of Residence:</strong> <span id="confirm-nation"></span></p>
+            <p><strong>Gender Identity:</strong> <span id="confirm-gender"></span></p>
         </div>
         
-        <div class="form-group">
-            <label for="name">Chosen Name:</label>
-            <input type="text" id="name" name="name" required placeholder="Enter your chosen name">
-        </div>
+        <p><strong>⚠️ Important:</strong> Once confirmed, your ID and name will be securely encrypted and stored in the Glorbenian database. This action cannot be undone.</p>
         
-        <div class="form-group">
-            <label for="gender">Gender Identity:</label>
-            <select id="gender" name="gender" required>
-                <option value="">Select your gender identity...</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Non-binary">Non-binary</option>
-                <option value="Genderqueer">Genderqueer</option>
-                <option value="Genderfluid">Genderfluid</option>
-                <option value="Two-spirit">Two-spirit</option>
-                <option value="Agender">Agender</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-        
-        <button type="submit">Generate My Glorbenian ID</button>
-    </form>
+        <button id="confirmBtn" onclick="confirmRegistration()">✅ Confirm Registration</button>
+        <button class="btn-secondary" onclick="cancelRegistration()">❌ Cancel</button>
+    </div>
     
     <div id="result" class="result"></div>
     
     <script>
+        let pendingData = null;
+        
+
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -144,7 +251,11 @@
             const data = {
                 nation: formData.get('nation'),
                 name: formData.get('name'),
-                gender: formData.get('gender')
+                gender: formData.get('gender'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                email_confirmation: formData.get('email_confirmation') === 'on',
+                sms_confirmation: formData.get('sms_confirmation') === 'on'
             };
             
             // Validation
@@ -163,7 +274,25 @@
                 return;
             }
             
+            if (!data.email.trim() || !data.email.includes('@')) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+            
+            if (!data.phone.trim()) {
+                showError('Please enter your phone number.');
+                return;
+            }
+            
+            if (!data.email_confirmation && !data.sms_confirmation) {
+                showError('Please select at least one confirmation method (email or SMS).');
+                return;
+            }
+            
             try {
+                document.getElementById('generateBtn').disabled = true;
+                document.getElementById('generateBtn').textContent = 'Generating...';
+                
                 const response = await fetch('/generate_id', {
                     method: 'POST',
                     headers: {
@@ -174,36 +303,112 @@
                 
                 const result = await response.json();
                 
-                if (response.ok) {
-                    showSuccess(result);
+                if (response.ok && result.needs_confirmation) {
+                    pendingData = result;
+                    showConfirmation(result.citizen_data);
                 } else {
                     showError(result.error || 'An error occurred while generating your ID.');
                 }
             } catch (error) {
                 showError('Network error. Please try again.');
+            } finally {
+                document.getElementById('generateBtn').disabled = false;
+                document.getElementById('generateBtn').textContent = 'Generate My Glorbenian ID';
             }
         });
+        
+        function showConfirmation(citizenData) {
+            // Hide registration form and show confirmation
+            document.getElementById('registration-section').classList.add('hidden');
+            document.getElementById('confirmation-section').classList.remove('hidden');
+            
+            // Populate confirmation data
+            document.getElementById('confirm-id').textContent = citizenData.id;
+            document.getElementById('confirm-name').textContent = citizenData.name;
+            document.getElementById('confirm-nation').textContent = citizenData.nation;
+            document.getElementById('confirm-gender').textContent = citizenData.gender;
+            
+            // Clear any previous results
+            document.getElementById('result').style.display = 'none';
+        }
+        
+        async function confirmRegistration() {
+            if (!pendingData) {
+                showError('No pending registration found.');
+                return;
+            }
+            
+            try {
+                document.getElementById('confirmBtn').disabled = true;
+                document.getElementById('confirmBtn').textContent = 'Confirming...';
+                
+                const response = await fetch('/confirm_registration', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        temp_id: pendingData.temp_id
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showSuccess(result);
+                    // Reset form
+                    document.getElementById('registrationForm').reset();
+                    pendingData = null;
+                } else {
+                    showError(result.error || 'Failed to confirm registration.');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+            } finally {
+                document.getElementById('confirmBtn').disabled = false;
+                document.getElementById('confirmBtn').textContent = '✅ Confirm Registration';
+            }
+        }
+        
+        function cancelRegistration() {
+            // Hide confirmation and show registration form
+            document.getElementById('confirmation-section').classList.add('hidden');
+            document.getElementById('registration-section').classList.remove('hidden');
+            
+            // Clear pending data
+            pendingData = null;
+            document.getElementById('result').style.display = 'none';
+        }
         
         function showSuccess(result) {
             const resultDiv = document.getElementById('result');
             resultDiv.className = 'result';
             resultDiv.innerHTML = `
-                <h3>🎉 Congratulations! Your Glorbenian ID has been generated!</h3>
-                <p><strong>ID Number:</strong> ${result.id}</p>
+                <h3>🎉 ${result.message}</h3>
+                <p><strong>Your Glorbenian ID:</strong> ${result.id}</p>
                 <p><strong>Citizen Name:</strong> ${result.name}</p>
                 <p><strong>Nation of Residence:</strong> ${result.nation}</p>
                 <p><strong>Gender Identity:</strong> ${result.gender}</p>
-                <p><em>Welcome to the Glorbenian community, ${result.name}!</em></p>
+                <p><strong>🔒 Data Security:</strong> Your ID and name have been encrypted and securely stored.</p>
+                <div class="security-note">
+                    🛡️ For security purposes, only your ID number is displayed in plain text. 
+                    Your personal information is encrypted using military-grade encryption.
+                </div>
             `;
             resultDiv.style.display = 'block';
+            
+            // Hide confirmation section and show registration form for next user
+            document.getElementById('confirmation-section').classList.add('hidden');
+            document.getElementById('registration-section').classList.remove('hidden');
         }
         
         function showError(message) {
             const resultDiv = document.getElementById('result');
             resultDiv.className = 'result error';
-            resultDiv.innerHTML = `<strong>Error:</strong> ${message}`;
+            resultDiv.innerHTML = `<strong>❌ Error:</strong> ${message}`;
             resultDiv.style.display = 'block';
         }
     </script>
 </body>
 </html>
+
