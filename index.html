@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenID</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8f0;
+        }
+        h1 {
+            color: #2d5016;
+            text-align: center;
+        }
+        .glorp-cat {
+            display: block;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2d5016;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #4a7c4e;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4a7c4e;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2d5016;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e8;
+            border: 2px solid #4a7c4e;
+            border-radius: 5px;
+            display: none;
+        }
+        .error {
+            background-color: #ffe6e6;
+            border-color: #cc0000;
+            color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Glorbenia "GreenID" Registration</h1>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.tenor.com%2FCcCVFRjDVoUAAAAj%2Fglorp-cat.gif&f=1&nofb=1&ipt=c22f3bbf38a0f025000b86bf2373ab76c76183f9e5f876c6631ce40d09746a89" alt="Glorp Cat" width="100" class="glorp-cat">
+    <hr>
+    <h2>About GreenID</h2>
+    <p>Queen Fendergluid I of Glorbenia (sadly with some help of ChatGPT) developed GreenID to allow Glorbenian citizens to use Glorbenian services that require an ID (Glorbenian National Bank for example). That's about it!</p>
+    
+    <h2>Register for GreenID</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="nation">Nation of Residence:</label>
+            <select id="nation" name="nation" required>
+                <option value="">Select your nation...</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Japan">Japan</option>
+                <option value="South Korea">South Korea</option>
+                <option value="Brazil">Brazil</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Italy">Italy</option>
+                <option value="Spain">Spain</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Sweden">Sweden</option>
+                <option value="Norway">Norway</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Finland">Finland</option>
+                <option value="Switzerland">Switzerland</option>
+                <option value="Austria">Austria</option>
+                <option value="Belgium">Belgium</option>
+                <option value="New Zealand">New Zealand</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Greece">Greece</option>
+                <option value="Poland">Poland</option>
+                <option value="Czech Republic">Czech Republic</option>
+                <option value="Hungary">Hungary</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="name">Chosen Name:</label>
+            <input type="text" id="name" name="name" required placeholder="Enter your chosen name">
+        </div>
+        
+        <div class="form-group">
+            <label for="gender">Gender Identity:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select your gender identity...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Genderqueer">Genderqueer</option>
+                <option value="Genderfluid">Genderfluid</option>
+                <option value="Two-spirit">Two-spirit</option>
+                <option value="Agender">Agender</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <button type="submit">Generate My Glorbenian ID</button>
+    </form>
+    
+    <div id="result" class="result"></div>
+    
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = {
+                nation: formData.get('nation'),
+                name: formData.get('name'),
+                gender: formData.get('gender')
+            };
+            
+            // Validation
+            if (!data.nation || data.nation === 'Glorbenia') {
+                showError('Please select a valid nation of residence (not Glorbenia).');
+                return;
+            }
+            
+            if (!data.name.trim()) {
+                showError('Please enter your chosen name.');
+                return;
+            }
+            
+            if (!data.gender) {
+                showError('Please select your gender identity.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/generate_id', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showSuccess(result);
+                } else {
+                    showError(result.error || 'An error occurred while generating your ID.');
+                }
+            } catch (error) {
+                showError('Network error. Please try again.');
+            }
+        });
+        
+        function showSuccess(result) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = `
+                <h3>🎉 Congratulations! Your Glorbenian ID has been generated!</h3>
+                <p><strong>ID Number:</strong> ${result.id}</p>
+                <p><strong>Citizen Name:</strong> ${result.name}</p>
+                <p><strong>Nation of Residence:</strong> ${result.nation}</p>
+                <p><strong>Gender Identity:</strong> ${result.gender}</p>
+                <p><em>Welcome to the Glorbenian community, ${result.name}!</em></p>
+            `;
+            resultDiv.style.display = 'block';
+        }
+        
+        function showError(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result error';
+            resultDiv.innerHTML = `<strong>Error:</strong> ${message}`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
